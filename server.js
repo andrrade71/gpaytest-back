@@ -5,7 +5,7 @@ import axios from "axios";
 
 const app = express();
 app.use(cors());
-app.options("*", cors());
+app.options("/*", cors());
 app.use(bodyParser.json({ limit: "1mb" }));
 
 const MERCHANT_ID = process.env.CIELO_MERCHANT_ID || "<SANDBOX_MERCHANT_ID>";
