@@ -5,7 +5,16 @@ import axios from "axios";
 
 const app = express();
 app.use(cors());
-app.options("/*", cors());
+// Explicitly handle OPTIONS requests without using a path pattern
+// (some path-to-regexp versions throw on '*' or '/*'). For OPTIONS we
+// invoke the cors middleware and immediately end the request with 204.
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    return cors()(req, res, () => res.sendStatus(204));
+  }
+  next();
+});
+
 app.use(bodyParser.json({ limit: "1mb" }));
 
 const MERCHANT_ID = process.env.CIELO_MERCHANT_ID || "<SANDBOX_MERCHANT_ID>";
