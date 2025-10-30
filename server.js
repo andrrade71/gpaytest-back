@@ -64,7 +64,11 @@ app.post("/gpay/debit", async (req, res) => {
     const payload = {
       MerchantOrderId:
         OrderId || `GPay-${Math.random().toString(36).slice(2, 10)}`,
-      Customer: { Name: CustomerName || "Cliente GPay" },
+      Customer: {
+        Name: CustomerName || "Cliente GPay",
+        Identity: "02153939020",
+        IdentityType: "CPF",
+      },
       Payment: {
         Type: "DebitCard",
         Amount: Amount,
