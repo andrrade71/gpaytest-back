@@ -1,11 +1,12 @@
 import express from "express";
-import axios from "axios";
-import bodyParser from "body-parser";
 import cors from "cors";
+import bodyParser from "body-parser";
+import axios from "axios";
 
 const app = express();
-app.use(bodyParser.json({ limit: "1mb" }));
 app.use(cors());
+app.options('*', cors());
+app.use(bodyParser.json({ limit: "1mb" }));
 
 const MERCHANT_ID = process.env.CIELO_MERCHANT_ID || "<SANDBOX_MERCHANT_ID>";
 const MERCHANT_KEY = process.env.CIELO_MERCHANT_KEY || "<SANDBOX_MERCHANT_KEY>";
